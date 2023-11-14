@@ -35,17 +35,27 @@ const createProduct = async (req, res) => {
 // }
 
 // READ
-const getProduct = async (req, res) => {
-        try {
+// const getProduct = async (req, res) => {
+//         try {
             
-            let product = await Product.find({},'-_id');
-            res.status(200).json(product); // 
-        }
-        catch (error) {
-            console.log(`ERROR: ${error.stack}`);
-            res.status(400).json({msj:`ERROR: ${error.stack}`});
-        }
+//             let product = await Product.find({},'-_id');
+//             res.status(200).json(product); // 
+//         }
+//         catch (error) {
+//             console.log(`ERROR: ${error.stack}`);
+//             res.status(400).json({msj:`ERROR: ${error.stack}`});
+//         }
+// }
+const getProduct = async (req, res) => {
+    try {
+        let products = await Product.find({}, '-_id');
+        res.status(200).json(products);
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+        res.status(500).json({ message: "Error al obtener productos", error: error.message });
+    }
 }
+
 
 // UPATE
 const editProduct = (req, res) => {
